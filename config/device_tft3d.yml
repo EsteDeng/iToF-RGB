@@ -1,0 +1,47 @@
+exp_name: Device_UW_GT
+mode: 'RGBD' 
+
+model:
+  resnet_depth: 18
+  up_mode: 'bilinear'
+  pretrained_img_encoder: true
+  resblock_decoder: false
+  out_size: [480,640] 
+  depth_res: false
+  out_act: 'tanh'
+
+data:
+  dataset: TFT3D 
+  cam_path: cam_param/
+  depth_scale: 3000
+
+train:
+  epochs: 100
+  dataloader: 
+    batch_size: 4
+    val_batch_size: 8
+  optim:
+    lr: 1.e-4
+    betas: [0, 0.999]
+    use_radam: true
+    fixed_img_encoder: false
+    lr_decay: 5.e-5
+    use_lr_decay: false
+
+  loss:
+    regression_loss: 'l1'   # 'l1', 'l2', 'smooth_l1'
+    structure_loss: true
+    smooth_loss: true
+    consistency_loss: true
+  loss_weights:
+    regression_loss_weight: 1.0
+    smooth_loss_weight: 1.0e-1
+    structure_loss_weight: 1.e-2
+    consistency_loss_weight: 1.e-2
+  structure_distillation:
+    knowledge: 'midas' 
+    midas:
+      midas_mode: 'MiDaS' #'DPT_Large, DPT_Hybrid, MiDaS, MiDaS_small'
+      resize4midas: false
+
+  

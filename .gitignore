@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.pyd
+
+# IDE
+.vscode/
+.idea/
+
+# Checkpoints & Models
+*.pt
+*.pth
+*.ckpt
+*.mat
+# Dataset / Results
+datasets/
+results/
+logs/
+*.log
+*.txt
+# OS
+.DS_Store
+
+# Cache
+.cache/
+# Local third-party code or large folders
+MiDaS/
+test_visuals/
